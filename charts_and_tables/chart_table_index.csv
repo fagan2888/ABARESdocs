@@ -1,0 +1,17 @@
+,caption,chapter,name,number,source,type
+0,"Line chart showing winter crop production in Australia, 2004-05 to 2014-15",Charts,line_chart,1.0,,chart
+1,"Area chart showing winter crop production in Australia, 2004-05 to 2014-15",Charts,area_chart,2.0,,chart
+2,"Bar chart showing winter crop production in Australia, 2004-05 to 2014-15",Charts,bar_chart,3.0,,chart
+3,"Horizontal Bar chart showing winter crop production in Australia, 2012-13 to 2014-15",Charts,bar_chart_h,4.0,,chart
+4,"Stacked bar chart showing winter crop production in Australia, 2012-13 to 2014-15",Charts,bar_chart_s,5.0,,chart
+5,"Scatter chart showing winter crop production in Australia against area, 2004-05 to 2014-15",Charts,scatter_chart,6.0,,chart
+6,"Multi-scatter chart showing winter crop production in Australia against area, 2004-05 to 2014-15",Charts,scatter_chart_b,7.0,,chart
+7,"Line chart with secondary y-axis showing winter crop production and area in Australia, 2004-05 to 2014-15",Charts,combo_chart_a,8.0,,chart
+8,"Bar and line chart showing winter crop production and area in Australia, 2004-05 to 2014-15",Charts,combo_chart_b,9.0,,chart
+9,"Area and line chart showing winter crop production and area in Australia, 2004-05 to 2014-15",Charts,combo_chart_c,10.0,,chart
+10,"Panel chart showing winter crop production in Australia, 2004-05 to 2014-15",Charts,panel_chart,11.0,,chart
+11,"Panel bar chart showing winter crop production in Australia, 2004-05 to 2014-15",Charts,panel_chart_b,12.0,,chart
+12,"Multi panel chart showing winter crop production and area in Australia, 2004-05 to 2014-15",Charts,multi_panel_chart_a,13.0,,chart
+13,"Multi panel bar/line chart showing winter crop production and area in Australia, 2004-05 to 2014-15",Charts,multi_panel_chart_b,14.0,,chart
+14,"winter crop production in Australia, 2004-05 to 2014-15",Tables,winter_crop_prod_aus,1.0,,table
+15,"winter crop area in Australia, 2004-05 to 2014-15",Tables,winter_crop_area_aus,2.0,,table

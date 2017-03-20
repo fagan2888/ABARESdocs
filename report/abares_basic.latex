@@ -1,0 +1,222 @@
+% ======================================================================================================
+% ABARES fancy latex report template - Preamble
+% ======================================================================================================
+\documentclass[11pt,a4paper,twoside,standard]{abaresbasic2016}
+%\let\newfloat\relax
+\usepackage{floatrow}
+\floatsetup[figure]{capposition=top}
+\floatsetup[longtable]{capposition=top, font=footnotesize, floatwidth=\textwidth}
+
+\newcommand{\tightlist}{}
+
+\usepackage{amsmath}
+\usepackage[large]{caption}
+\usepackage[titles]{tocloft}
+\usepackage{enumitem}
+\usepackage{csvsimple}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[explicit]{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage{changepage}
+\usepackage{fontspec}
+\usepackage{multicol}
+\usepackage{adjustbox}
+\usepackage{newfloat}
+\usepackage{lipsum}
+\usepackage{longtable}
+
+\definecolor{abares-orange}{rgb}{1,0.49,0.0} % ABARES Orange
+\definecolor{abares-red}{rgb}{0.59,0.0,0.09} % ABARES Red
+\definecolor{dark-colour}{rgb}{0,0,0} % Black
+
+% The following commands redefine the styles for the different section headings.
+\makeatletter
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}{0em}%
+  {-0.1\baselineskip}{0.01ex}{\normalfont\small\bfseries\sffamily}}
+\renewcommand{\subparagraph}{\@startsection{subparagraph}{5}{0em}%
+  {-0.1\baselineskip}{0.01ex}{\normalfont\small\sffamily}}
+\renewcommand{\contentsline}[4]{\color{dark-colour}\csname l@#1\endcsname{ #2}{\color{dark-colour}#3}{}}
+\makeatother
+
+
+\titleformat{\section}
+{}{}{10pt}{ \clearpage\normalfont\Huge\sffamily\color{dark-colour}#1}{}
+
+\titleformat{\subsection}
+{}{}{10pt}{\vspace{-5mm}\normalfont\LARGE\bfseries\rmfamily\color{abares-orange}#1}{}
+
+\titleformat{\subsubsection}
+{}{}{10pt}{\normalfont\bfseries\Large\color{abares-red}#1}{}
+
+\titleformat{name=\section, numberless}
+{}{}{10pt}{\clearpage\normalfont\Huge\sffamily\color{dark-colour}#1}{}
+
+\setlist[itemize]{label=\color{orange}\textbullet}
+
+\newmdenv[
+  topline=true,
+  bottomline=true,
+  leftline=true,
+  rightline=true,
+  skipabove=\topsep,
+  skipbelow=\topsep,
+  linecolor=abares-orange,
+  linewidth=0.8pt,
+  leftmargin=0,
+  rightmargin=0,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  innertopmargin=2mm,
+  innerbottommargin=2mm,
+]{boxborder}
+
+\newenvironment{abox}
+    {\begin{abaresbox}\begin{boxborder}}
+    {\end{boxborder}\end{abaresbox}}
+
+\captionsetup[table]{singlelinecheck=false, labelfont={bf,sf, color=gray}, textfont={bf,sf, color=gray}}
+\captionsetup[figure]{singlelinecheck=false, labelfont={bf,sf, color=gray}, textfont={bf,sf, color=gray}}
+
+\makeatletter \renewcommand\listoffigures{% \@starttoc{lof}% } \renewcommand\listoftables{% \@starttoc{lot}%
+}
+
+\makeatother
+\setsansfont{Calibri}
+\setmainfont{Cambria}
+
+\setcounter{secnumdepth}{1}
+
+\renewcommand{\cftdot}{}
+
+% ============================================================================================================
+% END PREAMBLE
+% ============================================================================================================
+
+\doclogoA{14mm}{261mm}{scale=1.1}{$logo$}
+\doclogoB{17mm}{0mm}{scale=0.94}{$biosphere$}
+
+\doctitle[$title$]
+
+\docsubtitle[$subtitle$]
+
+\docfootertitle[$title$]
+
+\docauthors[$for(author)$$author$$sep$, $endfor$]
+
+\docreportnum[$reporttype$]
+
+\docreportdate[$date$]
+
+\doccopyrightyear[$year$] % For the Copyright and Disclaimer notice
+
+\begin{document}
+
+\pagebreak
+
+\thispagestyle{empty}
+
+\mbox{}
+
+\copyright\ Commonwealth of Australia \thecopyrightyear\\
+\linebreak
+{\small \sffamily\bfseries\color{dark-colour} Ownership of intellectual property rights}
+
+\small Unless otherwise noted, copyright (and any other intellectual property rights, if any) in this publication is owned by the Commonwealth of Australia (referred to as the Commonwealth).
+
+{\small \sffamily\bfseries\color{dark-colour} Creative commons licence}
+
+\small All material in this publication is licensed under a Creative Commons Attribution 3.0 Australia Licence, save for content supplied by third parties, logos and the Commonwealth Coat of Arms.
+
+\small{Creative Commons Attribution 3.0 Australia Licence is a standard form licence agreement that allows you to copy, distribute, transmit and adapt this publication provided you attribute the work. A summary of the licence terms is available from \href{http://www.creativecommons.org/licenses/by/3.0/au/deed.en}{creativecommons.org/licenses/by/3.0/au/deed.en}. The full licence terms are available from \href{http://www.creativecommons.org/licenses/by/3.0/au/legalcode}{creativecommons.org/licenses/by/3.0/au/legalcode}}.
+
+{\sffamily\bfseries\color{dark-colour} Cataloguing data}
+
+\small $refauthors$ $year$, $title$$if(subtitle)$: $subtitle$$endif$ ABARES $reporttype$, Canberra, $month$. CC BY 3.0.
+
+\small ISSN $issn$\\
+\small ISBN $isbn$\\
+\small ABARES project 4$projectno$
+
+{\sffamily\bfseries\color{dark-colour} Internet}
+
+\small $title$$if(subtitle)$: $subtitle$$endif$ is available at \href{http://www.agriculture.gov.au/abares/publications}{agriculture.gov.au/abares/publications}.
+
+{\sffamily\bfseries\color{dark-colour} Australian Bureau of Agricultural and Resource Economics and Sciences (ABARES) }
+
+\small Postal address GPO Box 858 Canberra ACT 2601\\
+\small Switchboard +61 2 6272 3933\\
+\small Email \href{mailto:info.abares@agriculture.gov.au}{info.abares@agriculture.gov.au}\\
+\small Web \href{http://www.agriculture.gov.au/abares}{agriculture.gov.au/abares}
+
+\small Inquiries about the licence and any use of this document should be sent to \href{mailto:copyright@agriculture.gov.au}{copyright@agriculture.gov.au}.
+
+\small The Australian Government acting through the Department of Agriculture and Water Resources, represented by the Australian Bureau of Agricultural and Resource Economics and Sciences, has exercised due care and skill in preparing and compiling the information and data in this publication. Notwithstanding, the Department of Agriculture and Water Resources, ABARES, its employees and advisers disclaim all liability, including for negligence and for any loss, damage, injury, expense or cost incurred by any person as a result of accessing, using or relying on information or data in this publication to the maximum extent permitted by law.
+
+{\sffamily\bfseries\color{dark-colour} Acknowledgements}\\
+$thanks$
+\normalsize
+
+\pagenumbering{roman}
+
+\setcounter{page}{1}
+
+% set up the table of contents, list of figures, tables, etc if needed.
+\parskip=0ex
+\setcounter{tocdepth}{2}
+\tableofcontents
+{\vspace{15mm}\normalfont\huge\sffamily\color{dark-colour}Figures \normalfont}\\
+\listoffigures
+{\vspace{15mm}\normalfont\huge\sffamily\color{dark-colour}Tables \normalfont}\\
+\listoftables
+
+%\ifthenelse{\isodd{\value{page}}}
+%{}
+%{\mbox{}\clearpage}
+
+\parskip=2ex
+\parindent=0em
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\raggedright
+
+%=================================================
+$body$
+%=================================================
+
+\clearpage
+
+$if(natbib)$
+$if(bibliography)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+$endfor$
+%=================================================
+
+%Now lets try a box...
+
+%\begin{abox}
+%\caption{Example of a box}
+%\lipsum[1]
+%\end{abox}
+
+\end{document}

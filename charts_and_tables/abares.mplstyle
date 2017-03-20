@@ -1,0 +1,55 @@
+backend      : Qt4Agg
+backend.qt4 : PyQt4        
+lines.linewidth   : 2  
+lines.dash_capstyle : butt        
+lines.solid_capstyle : butt   
+patch.edgecolor: black
+patch.linewidth: 0.32
+font.family         : sans-serif
+font.size           : 7.9
+font.weight	    : 200
+font.sans-serif     : Verdana
+text.color          : black
+axes.color_cycle: ff7900, 96172e, 00505c, d5d2ca, 80ded6, eed6a5
+axes.facecolor: ffffff
+axes.labelsize: large
+axes.axisbelow: true
+axes.grid: false
+axes.edgecolor: white
+axes.linewidth: 0.32
+axes.titlesize: large
+
+xtick.major.size     : 4     
+xtick.minor.size     : 2     
+xtick.major.width    : 0.32   
+xtick.minor.width    : 0.32   
+xtick.major.pad      : 4     
+xtick.minor.pad      : 4     
+xtick.color          : k     
+xtick.labelsize      : medium
+xtick.direction      : out   
+
+ytick.major.size     : 4     
+ytick.minor.size     : 2     
+ytick.major.width    : 0.32   
+ytick.minor.width    : 0.32   
+ytick.major.pad      : 4     
+ytick.minor.pad      : 4     
+ytick.color          : k     
+ytick.labelsize      : medium
+ytick.direction      : in    
+
+grid.color       :   black   
+grid.linestyle   :   -       
+grid.linewidth   :   0.32     
+
+legend.fancybox      : False 
+                              
+figure.subplot.left: 0.08
+figure.subplot.right: 0.95 
+figure.subplot.bottom: 0.07
+figure.facecolor: ffffff
+
+savefig.edgecolor: ffffff
+savefig.facecolor: ffffff
+svg.fonttype: path

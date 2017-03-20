@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"$if(lang)$ lang="$lang$" xml:lang="$lang$"$endif$$if(dir)$ dir="$dir$"$endif$>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+$for(author-meta)$
+  <meta name="author" content="$author-meta$" />
+$endfor$
+$if(date-meta)$
+  <meta name="date" content="$date-meta$" />
+$endif$
+$if(keywords)$
+  <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
+$endif$
+  <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+  <style type="text/css">code{white-space: pre;}</style>
+$if(quotes)$
+  <style type="text/css">q { quotes: "“" "”" "‘" "’"; }</style>
+$endif$
+$if(highlighting-css)$
+  <style type="text/css">
+$highlighting-css$
+  </style>
+$endif$
+$for(css)$
+  <link rel="stylesheet" href="$css$" type="text/css" />
+$endfor$
+$if(math)$
+  $math$
+$endif$
+$for(header-includes)$
+  $header-includes$
+$endfor$
+</head>
+<body>
+$for(include-before)$
+$include-before$
+$endfor$
+$if(title)$
+<div id="$idprefix$header">
+<h1 class="title">$title$</h1>
+<h2>$if(subtitle)$
+$subtitle$
+$endif$
+</h2>
+<h4 class="author">
+$for(author)$
+$author$,
+$endfor$
+</h4>
+<p> </p>
+<p> </p>
+<div align="right">
+<p style="font-size:13px; font-family: Milo">Research by the Australian Bureau of Agricultural <br>and Resource Economics and Sciences</p>
+</div>
+<hr>
+$if(date)$
+<div align="right"><p style="font-size:15px; font-family: Milo">$date$</p></div>
+$endif$
+
+<!--<div class="relative">
+<div class="crop">
+  <img src="figures/Hume.jpg" alt="ABARES logo" style="width:100.0%" />
+  <p class="absolute-text">Introduction</a> </p>
+</div>
+</div>
+<br>
+<div class="relative">
+<div class="crop">
+  <img src="figures/burr2.jpg" alt="ABARES logo" style="width:100.0%" />
+  <p class="absolute-text">The southern Murray-Darling Basin region</a> </p>
+</div>
+</div>
+<br>
+<div class="relative">
+<div class="crop">
+  <img src="figures/wat.jpg" alt="ABARES logo" style="width:100.0%" />
+  <p class="absolute-text">Water market drivers</a> </p>
+</div>
+</div>
+-->
+
+$endif$
+$if(toc)$
+<h1>Contents</h1>
+<div id="$idprefix$TOC">
+$toc$
+</div>
+$endif$
+$body$
+$for(include-after)$
+$include-after$
+$endfor$
+</body>
+</html>

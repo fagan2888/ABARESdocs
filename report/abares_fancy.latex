@@ -1,0 +1,394 @@
+% ======================================================================================================
+% ABARES fancy latex report template - Preamble
+% ======================================================================================================
+\documentclass[11pt,a4paper,twoside,standard]{abaresfancy2016}
+%\let\newfloat\relax
+\usepackage{floatrow}
+\usepackage{lscape}
+\newcommand{\blandscape}{\clearpage \begin{landscape} \thispagestyle{conpage}}
+\newcommand{\elandscape}{\end{landscape} \clearpage}
+
+\newcommand{\bwide}{
+\begin{adjustwidth*}{}{-15mm}}
+
+\newcommand{\ewide}{
+\end{adjustwidth*}}
+\newcommand{\tightlist}{}
+
+\floatsetup[figure]{capposition=top, style=ruled, precode=thickrule, midcode=rule, postcode=lowrule}
+\floatsetup[longtable]{font=small, floatwidth=\textwidth, margins=raggedright, }
+%\floatsetup[longtable]{capposition=top, style=ruled, precode=tickrule, midcode=norule, postcode=none, rowpostcode=none}
+%\floatsetup[table]{capposition=top}
+\DeclareFloatVCode{thickrule}{\color{abares-orange}\hrule height1.1ptdepth0pt\kern7pt}
+\DeclareFloatVCode{rule}{\kern4pt\color{black}\hrule height.7ptdepth0pt\kern8pt}
+\DeclareFloatVCode{lowrule}{\kern7pt\color{abares-orange}\hrule height.7ptdepth0pt}
+\DeclareFloatVCode{norule}{\kern5pt}
+\usepackage{amsmath}
+\usepackage[]{caption}
+\usepackage[]{tocloft}
+\usepackage{pifont}
+\usepackage{csvsimple}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[explicit]{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage{changepage}
+\usepackage{fontspec}
+\usepackage{multicol}
+\usepackage{adjustbox}
+\usepackage{newfloat}
+\usepackage{lipsum}
+\usepackage{enumitem}
+
+\setlist{label={\color{abares-orange}\textbullet}}
+
+\usepackage{longtable, booktabs}
+\listfiles
+\DeclareFloatingEnvironment[fileext=frm,placement={!ht},name=BOX]{abaresbox}
+\captionsetup[abaresbox]{singlelinecheck=false, labelfont={sf, bf,color=orange}, textfont={sf, color=black}, labelsep=quad, name=BOX}
+%\captionsetup[longtable]{singlelinecheck=false, labelfont={sf, bf,color=orange}, textfont={sf, color=black}, labelsep=quad, name=TABLE}
+\captionsetup[figure]{singlelinecheck=false, labelfont={sf, bf,color=orange}, textfont={sf, color=black}, labelsep=quad, name=FIGURE, format=myformat}
+%\captionsetup[table]{singlelinecheck=false, labelfont={sf, bf,color=orange}, textfont={sf, color=black}, labelsep=quad, name=TABLE}
+
+\DeclareCaptionFormat{lineformat}{\color{abares-orange}\rule{\textwidth}{1.1pt}\\\color{black}#1#2#3\vspace{-3mm}}
+\captionsetup[longtable]{singlelinecheck=false, labelfont={normalsize, sf, bf, color=orange}, textfont={normalsize, sf}, labelsep=quad, format=lineformat}
+\renewcommand{\tablename}{TABLE}
+
+\renewcommand{\cftlottitlefont}{\normalfont\sffamily\bfseries}
+\renewcommand{\cftloftitlefont}{\normalfont\sffamily\bfseries}
+
+%\renewcommand{\contentsname}{\begin{siderules}\normalfont\Huge\sffamily\color{abares-orange}Contents\end{siderules}}
+\setsansfont{MiTxLF__}[Extension = .ttf,
+                       Path = /Users/DAUser/Documents/TFPCA/OUT/fonts/, 
+                       AutoFakeBold=1.35]
+\setmainfont{Cambria}
+
+\DeclareCaptionFormat{myformat}{#1#2#3\vspace*{-0.0\baselineskip}\vspace*{0.0\baselineskip}}
+
+\makeatletter
+\renewcommand\tableofcontents{%
+    \begin{siderules} \parbox[b][35mm][b]{125mm}{\normalfont\Huge\sffamily\color{abares-orange}Contents} \end{siderules} \thispagestyle{sectionpage} \\%
+    \@starttoc{toc}%
+    }
+%\renewcommand\listoftables{%
+%    \@starttoc{lot}%
+%}
+\makeatother
+
+\renewcommand{\cftfigfont}{\sffamily}
+\renewcommand{\cftdot}{}
+%\renewcommand{\cftafterlottitle}{}
+
+\definecolor{abares-orange}{RGB}{255,121,0} % ABARES Orange
+\definecolor{abares-gray}{HTML}{D5D2CA} % ABARES Gray
+\definecolor{abares-red}{RGB}{150,23,46} % ABARES Red
+\definecolor{black}{rgb}{0.0,0.0,0.0} % ABARES Red
+
+\newmdenv[
+  topline=false,
+  bottomline=false,
+  leftline=true,
+  rightline=true,
+  skipabove=\topsep,
+  skipbelow=\topsep,
+  linecolor=abares-orange,
+  linewidth=1pt,
+  leftmargin=1mm,
+  innerleftmargin=4mm,
+  innermargin = 1mm,
+  outermargin=1mm
+]{siderules}
+
+\newmdenv[
+  topline=true,
+  bottomline=true,
+  leftline=true,
+  rightline=true,
+  skipabove=\topsep,
+  skipbelow=\topsep,
+  linecolor=abares-orange,
+  linewidth=0.8pt,
+  leftmargin=0,
+  rightmargin=0,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  innertopmargin=2mm,
+  innerbottommargin=2mm,
+]{boxborder}
+
+\newmdenv[
+  topline=true,
+  bottomline=true,
+  leftline=false,
+  rightline=false,
+  skipabove=\topsep,
+  skipbelow=\topsep,
+  linecolor=abares-orange,
+  linewidth=0.8pt,
+  leftmargin=0,
+  rightmargin=0,
+  innerleftmargin=0,
+  innerrightmargin=0,
+  innertopmargin=1.6mm,
+  innerbottommargin=2mm,
+]{topbottomrules}
+
+\newmdenv[
+  topline=true,
+  bottomline=false,
+  leftline=false,
+  rightline=false,
+  skipabove=\topsep,
+  skipbelow=\topsep,
+  linecolor=abares-orange,
+  linewidth=0.8pt,
+  leftmargin=0,
+  rightmargin=0,
+  innerleftmargin=0,
+  innerrightmargin=0,
+  innertopmargin=1.6mm,
+  innerbottommargin=2mm,
+]{mdtoprule}
+
+%\AtBeginDocument{
+% \addtocontents{toc}{\protect\thispagestyle{contentspage}}
+% \addtocontents{lof}{\protect\thispagestyle{contentspage}}
+% \addtocontents{lot}{\protect\thispagestyle{contentspage}}
+%}
+
+\titleformat{\section}
+{}{}{0pt}{\clearpage \color{abares-orange}\rule{0.8pt}{35mm}\hspace{5mm} \parbox[b][35mm][b]{137mm}{\normalfont\huge\sffamily\color{abares-red} \raggedright Chapter \thesection\\ \normalfont\Huge\sffamily\color{abares-orange}#1}  {\color{abares-orange}\rule{0.8pt}{35mm}} \thispagestyle{sectionpage}}{}
+
+\titleformat{\subsection}
+{}{}{10pt}{\raggedright\normalfont\bfseries\LARGE\color{abares-orange} #1 }{}
+
+\titleformat{\subsubsection}
+{}{}{10pt}{\raggedright\normalfont\bfseries\Large\color{abares-red} #1 }{}
+
+\titleformat{name=\section, numberless}
+{}{}{0pt}{\color{abares-orange}\rule{0.8pt}{35mm}\hspace{5mm} \parbox[b][35mm][b]{137mm}{\normalfont\Huge\sffamily\color{abares-orange}#1} {\color{abares-orange}\rule{0.8pt}{35mm}} \thispagestyle{sectionpage}}{}
+
+\titlecontents{figure}[0em]{\normalfont}{\thecontentslabel\hspace*{1.5em}}{}{\ \hfill \contentspage}
+
+\titlecontents{table}[0em]{\normalfont}{\thecontentslabel\hspace*{1.5em}}{}{\ \hfill \contentspage}
+
+%\titlecontents{abaresbox}[0em]{\normalfont}{\thecontentslabel\hspace*{1.5em}}{}{\ \hfill \contentspage}
+\renewcommand{\refname}{References}
+
+\setcounter{secnumdepth}{1}
+
+\pagestyle{fancy}
+
+\fancyhf{}
+\fancyfoot{}
+\lhead[\sffamily\color{abares-orange}\smalles\nouppercase{\leftmark}]{}
+\rhead[]{\sffamily\color{abares-orange}\small\nouppercase{\leftmark}}
+\renewcommand{\headrulewidth}{0pt}
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{#1}}
+\newcommand{\abaresfont}{%
+\footnotesize\bfseries\sffamily}
+\fancyfoot[RO]{\abaresfont ABARES \hspace{5mm} \normalsize \thepage \\ \normalfont\scriptsize\sffamily\thefootertitle \hspace{8.75mm}}
+\fancyfoot[LE]{\small\bfseries\sffamily \thepage}
+
+
+\fancypagestyle{sectionpage}{%
+    \fancyhead{}
+}
+
+\fancypagestyle{conpage}{%
+    \fancyhead{}
+    \fancyfoot{}
+}
+
+\fancypagestyle{fancytwo}{%
+\fancyhf{}
+\fancyfoot{}
+\lhead[\sffamily\color{abares-orange}\small\bfseries\nouppercase{\leftmark}]{}
+\rhead[]{\sffamily\color{abares-orange}\small\bfseries\nouppercase{\leftmark}}
+\fancyfoot[RO]{\abaresfont ABARES \hspace{5mm} \normalsize\thepage \\ \normalfont\scriptsize\sffamily\thefootertitle \hspace{8.75mm}}
+\fancyfoot[LE]{\small \sffamily\bfseries \thepage}
+}
+
+\newcommand*\cleartoleftpage{%
+\ifodd\value{page}\hbox{
+}\newpage\fi
+}
+
+%\makeatletter
+%\renewenvironment{figure}[1][\fps@figure]{
+%  \edef\@tempa{\noexpand\@float{figure}[#1]}
+% \@tempa\begin{topbottomrules}}
+%  {\end{topbottomrules}\end@float}
+%\makeatother
+
+
+%\makeatletter
+%\renewenvironment{table}[1][\fps@table]{
+%  \edef\@tempa{\noexpand\@float{table}[#1]}
+%  \@tempa\begin{mdtoprule}}
+%  {\end{mdtoprule}\end@float}
+%\makeatother
+
+\newenvironment{abox}
+    {\begin{abaresbox}\begin{boxborder}}
+    {\end{boxborder}\end{abaresbox}}
+
+%\usepackage[linktocpage=true]{hyperref}
+
+% ============================================================================================================
+% END PREAMBLE
+% ============================================================================================================
+\pagecolor{abares-gray}
+\doclogoA{14mm}{261mm}{scale=1.1}{$logo$}
+\doclogoB{17mm}{0mm}{scale=0.94}{$biosphere$}
+
+\doctitle[$title$]
+
+\docsubtitle[$subtitle$]
+
+\docfootertitle[$title$]
+
+\docauthors[$for(author)$$author$$sep$, $endfor$]
+
+\docreportdate[$date$]
+
+\doccopyrightyear[$copyrightyear$]
+
+\begin{document}
+
+\clearpage
+\pagecolor{white}
+\thispagestyle{empty}
+
+\changepage{2\baselineskip}{34mm}{}{-34mm}{}{-5\baselineskip}{}{-2\baselineskip}{}
+
+\includegraphics[scale=0.28]{$biosphere$}\\
+\hrule
+\begin{multicols}{2}
+
+
+\copyright\ Commonwealth of Australia $year$\\
+\linebreak
+{\small \sffamily\bfseries\color{black} Ownership of intellectual property rights}
+
+\small Unless otherwise noted, copyright (and any other intellectual property rights, if any) in this publication is owned by the Commonwealth of Australia (referred to as the Commonwealth).
+
+{\small \sffamily\bfseries\color{black} Creative commons licence}
+
+\small All material in this publication is licensed under a Creative Commons Attribution 3.0 Australia Licence, save for content supplied by third parties, logos and the Commonwealth Coat of Arms.
+
+\small{Creative Commons Attribution 3.0 Australia Licence is a standard form licence agreement that allows you to copy, distribute, transmit and adapt this publication provided you attribute the work. A summary of the licence terms is available from \href{http://www.creativecommons.org/licenses/by/3.0/au/deed.en}{creativecommons.org/licenses/by/3.0/au/deed.en}. The full licence terms are available from \href{http://www.creativecommons.org/licenses/by/3.0/au/legalcode}{creativecommons.org/licenses/by/3.0/au/legalcode}}.
+
+{\sffamily\bfseries\color{black} Cataloguing data}
+
+\small $refauthors$  $year$ $title$$if(subtitle)$: $subtitle$$endif$, ABARES $reporttype$, Canberra, $month$. CC BY 3.0.
+
+\small ISSN $issn$\\
+\small ISBN $isbn$\\
+\small ABARES project 4$projectno$\\
+
+\columnbreak
+
+{\sffamily\bfseries\color{black} Internet}
+
+\small $title$ is available at \\ \href{http://www.agriculture.gov.au/abares/publications}{agriculture.gov.au/abares/publications}.
+
+{\sffamily\bfseries\color{black} Australian Bureau of Agricultural and Resource Economics and Sciences (ABARES) }
+
+\small Postal address GPO Box 858 Canberra ACT 2601\\
+\small Switchboard +61 2 6272 3933\\
+\small Email \href{mailto:info.abares@agriculture.gov.au}{info.abares@agriculture.gov.au}\\
+\small Web \href{http://www.agriculture.gov.au/abares}{agriculture.gov.au/abares}
+
+\small Inquiries about the licence and any use of this document should be sent to \href{mailto:copyright@agriculture.gov.au}{copyright@agriculture.gov.au}.
+
+\small The Australian Government acting through the Department of Agriculture and Water Resources, represented by the Australian Bureau of Agricultural and Resource Economics and Sciences, has exercised due care and skill in preparing and compiling the information and data in this publication. Notwithstanding, the Department of Agriculture and Water Resources, ABARES, its employees and advisers disclaim all liability, including for negligence and for any loss, damage, injury, expense or cost incurred by any person as a result of accessing, using or relying on information or data in this publication to the maximum extent permitted by law.
+
+{\sffamily\bfseries\color{black} Acknowledgements}\\
+$thanks$
+   \end{multicols}
+  \clearpage
+  \normalsize
+
+
+%=================================================
+
+\normalsize
+\pagenumbering{roman}
+
+\setcounter{page}{1}
+
+\parskip=0ex
+\setcounter{tocdepth}{2}
+
+\pagestyle{conpage}
+
+\changepage{}{-30mm}{}{34mm}{}{}{}{}{}
+
+\color{abares-orange}\rule{0.8pt}{35mm}\hspace{5mm}
+\parbox[b][35mm][b]{137mm}{\normalfont\Huge\sffamily\color{abares-orange}Contents}
+\color{abares-orange}\rule{0.8pt}{35mm}
+\color{black}
+
+\par
+\vspace{10mm}
+\makeatletter
+\@starttoc{toc}%
+\makeatother
+
+%{\vspace{5mm} \sffamily\bfseries Tables}\\
+\listoftables
+
+%{\vspace{5mm} \sffamily\bfseries Figures}\\
+\listoffigures
+
+%\ifthenelse{\isodd{\value{page}}}
+%{}
+%{\mbox{}\clearpage}
+
+\cleardoublepage
+
+\parskip=2ex
+\parindent=0em
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\raggedright
+\normalfont
+
+\pagestyle{fancytwo}
+
+
+%=================================================
+$body$
+%=================================================
+
+\clearpage
+
+$if(natbib)$
+$if(bibliography)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+$endfor$
+
+\end{document}
