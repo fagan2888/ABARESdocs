@@ -80,7 +80,7 @@ chartdata = table1.copy()
 chartdata = chartdata.drop(['QLD', 'SA', 'WA'], 1)
 chartdata.to_csv(dataout + "bar_chart.csv")
 
-fig = cb.make_chart(chartdata, kind='bar',  legend=True, date=True, unit_label = 'kt', date_n=2)
+fig = cb.make_chart(chartdata, kind='bar',  legend=True, unit_label = 'kt', date=True, date_n=2)
 cb.save_chart(fig, "bar_chart")
 
 # =============================
@@ -152,6 +152,8 @@ offset = chartdata.copy()
 
 fig = cb.make_chart(chartdata, kind='multiscatter', msize=10, legend=True, unit_label='kt', xunit_label='000 Ha', scatlabel=['2004-05 to 2010-11','2011-12 to 2014-15'], scatindex = [np.arange(0,6), np.arange(6,10)], label=True, offset=offset, ylim=(15000,50000), date=True)
 cb.save_chart(fig, "scatter_chart_b")
+
+
 
 # ==============================
 #
@@ -237,7 +239,7 @@ cb.save_chart(fig, "multi_panel_chart_a", scale=False)
 
 # =============================
 #
-# Chart type 9b Multi-series panel chart (two lines per panel)
+# Chart type 9b Multi-series panel chart (bar and line in each panel)
 #
 # =============================
 

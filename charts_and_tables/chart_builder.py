@@ -23,7 +23,7 @@ def get_col_widths(dataframe):
 def label_point(a, ax, c):
    
     for i, point in a.iterrows():
-        ax.text(point['x'], point['y'], str(point['val']),  fontproperties= mpl.font_manager.FontProperties(size=7.5), color='gray')
+        ax.text(point['x'], point['y'], point['val'],  fontproperties= mpl.font_manager.FontProperties(size=7.5), color='gray')
       
         
 class ChartBuilder:
@@ -248,7 +248,7 @@ class ChartBuilder:
                     
         if date:
             if type(data.index) == pd.core.index.Int64Index:
-                data.index = np.array([str(d-1) + "—" + str(d)[-2:] for d in data.index])
+                data.index = np.array([str(d-1) + "â€“" + str(d)[-2:] for d in data.index])
             elif builddate:
                 data.index = pd.to_datetime(data.index, format='%d/%m/%Y')      
             
@@ -315,18 +315,23 @@ class ChartBuilder:
             if kind == 'bar':
                 idx = ax.xaxis.get_majorticklocs().astype(int)
                 labels  = data.index[idx]
-              
+                
                 if date:
+                     
                     n = date_n           
                     ticks = [i for i in range(len(data.index))]
-                    ticklabels = [l for l in data.index]
+                    ticklabels = [l.decode('utf-8') for l in data.index]
+ 
                     ax.xaxis.set_ticks(ticks[::n])
+ 
                     if not(type(data.index[0]) == str):
                         temp = pd.to_datetime(ticklabels[::n])
                         temp = [item.strftime('%b %Y') for item in temp]
                     else:
                          temp = ticklabels[::n]
+                  
                     ax.xaxis.set_ticklabels(temp)
+                  
             else:
                 labels = ax.xaxis.get_majorticklocs()
                 labels = [(format(s, xtickformat)) for s in labels]
@@ -340,11 +345,16 @@ class ChartBuilder:
                 plt.setp(labels, rotation=90)
                 
             labels = ax.yaxis.get_majorticklocs()
+           
+            #ylim = ax.get_ylim()
+            
+            ax.set_ylim(labels[0], labels[len(labels)-1])
             labels = [format(s, ytickformat) for s in labels]
             #labels = [s.replace(",", " ") for s in labels]
             if unit_label != 'none':
                 labels[0] = unit_label
             ax.set_yticklabels(labels)
+            
         
         
 
@@ -359,7 +369,8 @@ class ChartBuilder:
                         legobj.set_linewidth(2.0)  
             if kind != 'scatter' :  
                 plt.setp(plt.gca().get_legend().get_texts(), fontsize='8.3')
-        
+                plt.gca().get_legend().get_frame().set_alpha(0)
+       
                 
  
             
@@ -371,34 +382,35 @@ class ChartBuilder:
             plt.close('all')
             fig = plt.figure()       
             ax = fig.gca() 
-            if subplot:
-                fig.set_tight_layout(False)
         else:
             ax = fig.axes[axnum]
             n = len(fig.axes)
+        if subplot:
+            fig.set_tight_layout(True)
     
         if (kind == 'bar'):
             ax = data.plot(kind=kind, edgecolor='none', stacked=stacked, legend=legend, subplots=subplot, layout=layout, ax=ax, ylim=ylim)
-            if subplot:
-                n = ax.shape[0]                
-                for i in range(n):
-                    for a in ax[i]:
-                        a.get_lines()[0].set_visible(False)
-            else:
-                ax.get_lines()[0].set_visible(False)
+            
+            #if subplot:
+            #    n = ax.shape[0]                
+            #    for i in range(n):
+             #       for a in ax[i]:
+             #           a.get_lines()[0].set_visible(False)
+            #else:
+                #ax.get_lines().set_visible(False)
                 
         elif (kind == 'barh'):
             if (colors != 'none'):
                 ax = data.plot(kind=kind, edgecolor='none', stacked=stacked, legend=legend, subplots=subplot, layout=layout, ax=ax, colors=colors, figsize=figsize)
             else:
                 ax = data.plot(kind=kind, edgecolor='none', stacked=stacked, legend=legend, subplots=subplot, layout=layout, ax=ax)
-            if subplot:
-                n = ax.shape[0]                
-                for i in range(n):
-                    for a in ax[i]:
-                        a.get_lines()[0].set_visible(False)
-            else:
-                ax.get_lines()[0].set_visible(False)
+            #if subplot:
+                #n = ax.shape[0]                
+                #for i in range(n):
+                    #for a in ax[i]:
+                        #a.get_lines()[0].set_visible(False)
+            #else:
+                #ax.get_lines().set_visible(False)
         elif kind =='scatter':
             n = 0            
             if scatlabel != 'none':
@@ -427,6 +439,7 @@ class ChartBuilder:
             lw = 0
             for i in range(len(scatindex)):
                 d = data.iloc[scatindex[i]]
+                
                 d.columns = [scatlabel[i]]
                 c = colors[i]
                 if fitline[i]:
@@ -434,6 +447,7 @@ class ChartBuilder:
                     ms = None
                     
                 ax = d.plot(kind='line', ax = ax, legend=legend, subplots=subplot, layout=layout, linewidth=lw, marker=ms, markersize=msize, color=c, fillstyle='full', markeredgecolor=c, markeredgewidth=0.0)
+                
         else:
             ax = data.plot(kind=kind, ax = ax, legend=legend, subplots=subplot, layout=layout, linewidth=linewidth)
         
@@ -468,10 +482,12 @@ class ChartBuilder:
             
                     
         else:
+            
             self.abares_style(ax, data, kind, legend, unit_label, xtickformat, ytickformat, xunit_label, date, date_n=date_n, legdown=legdown)
+            
             if label:
                 temp = data + offset            
-                temp['val'] = data.index
+                temp['val'] = [s.decode('utf-8') for s in data.index]
                 temp.columns = ['x', 'y', 'val']
                 label_point(temp, ax, self.abares_colors[3])
         
@@ -520,7 +536,7 @@ class ChartBuilder:
          
         if date:   
             if type(data.index) == pd.core.index.Int64Index:
-                data.index = np.array([str(d-1) + "—" + str(d)[-2:] for d in data.index])
+                data.index = np.array([str(d-1) + "â€“" + str(d)[-2:] for d in data.index])
             elif builddate:
                 data.index = pd.to_datetime(data.index, format='%d/%m/%Y')
         
@@ -529,7 +545,9 @@ class ChartBuilder:
                 ax2 = ax.twinx()
                 i = 0
                 for col in secondary:        
-                    c = colors[i]         
+                    c = colors[i] 
+                    temp = data[col]
+                    temp.index = range(data.shape[0])
                     ax2.plot(data[col], label=col, color=c)
                     i += 1
             else:
@@ -545,6 +563,9 @@ class ChartBuilder:
                 temp = pd.DataFrame(data[col])
                 ax2 = temp.plot(kind='line', ax = ax, secondary_y = secondary_y, color = c, legend=False)   
                 i += 1
+                ax2.xaxis.grid(True)
+                ax.yaxis.grid(True)
+               
       
                 
         fig = ax.get_figure()
@@ -560,7 +581,7 @@ class ChartBuilder:
                 handles1, labels1 = axes[1].get_legend_handles_labels()            
                 handles = handles0 + handles1
                 labels = [lab + ' (left axis)' for lab in labels0] + [lab + ' (right axis)' for lab in labels1]
-                axes[0].legend(handles, labels, bbox_to_anchor=(1.12, 1), loc='upper left', borderaxespad=0.)
+                axes[0].legend(handles, labels, bbox_to_anchor=(1.12, 1), loc='upper left', borderaxespad=0., framealpha=0)
                 
             if clean_secondary != None and not np.isnan(data[secondary[0]].max(skipna=True)):
                 inc = clean_secondary[0]
@@ -603,7 +624,7 @@ class ChartBuilder:
         else:
             for legobj in axes[0].get_legend().legendHandles:
                 legobj.set_linewidth(2.0) 
-            axes[0].legend(bbox_to_anchor=(1.12, 1), loc='upper left', borderaxespad=0.)
+            axes[0].legend(bbox_to_anchor=(1.12, 1), loc='upper left', borderaxespad=0., framealpha=0)
             plt.setp(axes[0].get_legend().get_texts(), fontsize='8.3')
             
             
@@ -615,7 +636,7 @@ class ChartBuilder:
     def plot_multi_secondary(self, data, fig, primary, secondary, unit_label2='none',  ytickformat2=',.0f', date=False, colors='none', manual=False, builddate=True, secondary_y=True, newindex=False, leglabel = 'none', kind='none', clean_secondary=None):
     
         #d = len(primary)
-        
+        fig.set_tight_layout(True)
         if newindex:
             data = data[secondary]
             data.index = data[secondary[0]]
@@ -627,7 +648,7 @@ class ChartBuilder:
          
         if date and not(newindex):   
             if type(data.index) == pd.core.index.Int64Index:
-                data.index = np.array([str(d-1) + "—" + str(d)[-2:] for d in data.index])
+                data.index = np.array([str(d-1) + "â€“" + str(d)[-2:] for d in data.index])
             elif builddate:
                 data.index = pd.to_datetime(data.index, format='%d/%m/%Y')
      
@@ -678,8 +699,8 @@ class ChartBuilder:
             axc.spines['bottom'].set_color('black')
             axc.spines['top'].set_color('none')   
                 
-            plt.tight_layout()
-                
+            #plt.tight_layout()
+        fig.set_tight_layout(True)
         fig = axc.get_figure()
 
         handles, labels = axes[0].get_legend_handles_labels()
@@ -688,7 +709,7 @@ class ChartBuilder:
             h, l = axc.get_legend_handles_labels()
             labels = labels + l
             handles = handles + h
-        axes[0].legend(handles, leglabel, bbox_to_anchor=(1.1, 1.25), loc='upper center', borderaxespad=0., ncol=2)
+        axes[0].legend(handles, leglabel, bbox_to_anchor=(1.1, 1.25), loc='upper center', borderaxespad=0., ncol=2, framealpha=0)
         
         mpl.rcParams['axes.color_cycle'] = self.abares_colors    
     
