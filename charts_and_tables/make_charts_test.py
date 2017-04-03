@@ -55,7 +55,7 @@ table3 = table3.drop(['TAS', 'AUS'], 1)
 chartdata = table1.copy()
 chartdata.to_csv(dataout + "line_chart.csv")
 
-fig = cb.make_chart(chartdata, kind='line',  legend=True, date=True, unit_label = 'kt')
+fig = cb.make_chart(chartdata, kind='line',  legend=True, date=True, unit_label = 'kt', plotly=True)
 cb.save_chart(fig, "line_chart")
 
 # =============================

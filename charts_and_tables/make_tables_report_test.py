@@ -23,8 +23,7 @@ datain = home + "\\input\\"
 #
 # =============================
 
-rb2 = report_builder.ReportBuilder(tablesf, reportf, "2_text")
-rb4 = report_builder.ReportBuilder(tablesf, reportf, "4_tables")
+rb = report_builder.ReportBuilder(tablesf, reportf, "report")
 
 # =============================
 #
@@ -62,8 +61,7 @@ stats['sum_crop_area'] = format(table1.ix[2015]['QLD'], ',.1f')
 #
 # =============================
 
-rb2.insert_tables_stats(['winter_crop_prod_aus', 'winter_crop_area_aus'], [',.1f', ',.1f'], stats)
-rb4.insert_tables_stats(['winter_crop_prod_aus', 'winter_crop_area_aus'], [',.1f', ',.1f'], stats)
+rb.insert_tables_stats(['winter_crop_prod_aus', 'winter_crop_area_aus'], [',.1f', ',.1f'], stats)
 
 # =============================
 #
@@ -71,5 +69,5 @@ rb4.insert_tables_stats(['winter_crop_prod_aus', 'winter_crop_area_aus'], [',.1f
 #
 # =============================
 
-rb2.make_chart_index('chart_table_index.csv', ['2_text.md', '3_charts.md', '4_tables.md'])
+rb.make_chart_index('chart_table_index.csv', ['report.md'])
 

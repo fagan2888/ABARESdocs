@@ -5,8 +5,9 @@ from matplotlib import pyplot as plt
 import pandas as pd
 import numpy as np
 #from matplotlib import dates as dt 
-#import plotly
-#import plotly.graph_objs as go
+import plotly
+import plotly.plotly as py
+import plotly.graph_objs as go
 import matplotlib as mpl
 import shutil
 import os
@@ -136,7 +137,7 @@ class ChartBuilder:
         sheet.set_row(1,18, self.formats[1])
     
         #contents =  self.excelfile.book.worksheets_objs[0]
-        self.contents.write_url(5 + self.counter,10, 'internal:\'' + sname +'\'!A1', string = 'Figure ' + str(figurenum) + ": " + self.meta.iloc[idx]['caption'], cell_format=self.formats[4])
+        self.contents.write_url(5 + self.counter,9, 'internal:\'' + sname +'\'!A1', string = 'Figure ' + str(figurenum) + ": " + self.meta.iloc[idx]['caption'], cell_format=self.formats[4])
         
         shutil.copy(self.outfolder + fname + ".pdf", self.outfolder + '\\final\\' + 'Figure ' + str(figurenum) + ".pdf")
         
@@ -165,7 +166,7 @@ class ChartBuilder:
         sheet.set_row(0, 70, self.formats[0])
         sheet.set_row(1,18, self.formats[1])
     
-        self.contents.write_url(5 + self.counter,10, 'internal:\'' + sname +'\'!A1', string = 'Table ' + str(figurenum) + ": " + self.meta.iloc[idx]['caption'], cell_format=self.formats[4])
+        self.contents.write_url(5 + self.counter,9, 'internal:\'' + sname +'\'!A1', string = 'Table ' + str(figurenum) + ": " + self.meta.iloc[idx]['caption'], cell_format=self.formats[4])
         
     
     def make_excel(self, metafile, excelfile, title, imagelink=False):
@@ -175,22 +176,25 @@ class ChartBuilder:
         self.excelfile = pd.ExcelWriter(excelfile, engine='xlsxwriter', datetime_format='dd/mm/yyyy')
         self.contents, self.formats = self.build_contents()
 
-        old_section_name = 'none'
+        #old_section_name = 'none'
 
         for i in range(self.meta.shape[0]):
             chart = self.meta.iloc[i]
             fname = chart['name']
             
-            if chart.chapter != old_section_name:
-                self.start_section(chart.chapter)
-                old_section_name = chart.chapter
+            #if chart.chapter != old_section_name:
+            #    self.start_section(chart.chapter)
+            #    old_section_name = chart.chapter
                 
-            data = pd.read_csv(self.infolder + fname + '.csv', index_col=0, encoding = 'cp1252')
-            if chart['type'] == 'chart':     
-                self.chart_to_excel(data, i, imagelink=imagelink)
-            else:
-                self.table_to_excel(data, i)
-
+            try:
+                data = pd.read_csv(self.infolder + fname + '.csv', index_col=0, encoding = 'cp1252')
+                if chart['type'] == 'chart':     
+                    self.chart_to_excel(data, i, imagelink=imagelink)
+                else:
+                    self.table_to_excel(data, i)
+            except:
+                pass
+            
             self.counter +=1
         
         self.counter = 0
@@ -236,7 +240,7 @@ class ChartBuilder:
             fig.savefig((self.outfolder + fname + ".jpg"), bbox_inches='tight', dpi=75) 
             fig.savefig((self.outfolder + fname + ".pdf"), bbox_inches='tight', dpi=300)  
             
-    def make_chart(self, data, kind='line', unit_label='none', xunit_label='none', legend=True, no_xlabel=True, ytickformat=',g', xtickformat=',g', stacked=False, fig='none', date=False, makefig=True, xlfile = 'none', title='none', xlformats='none', multi=False, figsize=(4.3,2.8), addtoexcel=True, primary='none', colors='none', layout=(1,3), scatindex='none', scatlabel='none', label=False, combo=False, ylim=None, ylim_min=None, builddate=True, offset='none', date_n=1, linewidth=2.1, legdown=False, msize=0.35, fitline=None):
+    def make_chart(self, data, kind='line', unit_label='none', xunit_label='none', legend=True, no_xlabel=True, ytickformat=',g', xtickformat=',g', stacked=False, fig='none', date=False, makefig=True, xlfile = 'none', title='none', xlformats='none', multi=False, figsize=(4.3,2.8), addtoexcel=True, primary='none', colors='none', layout=(1,3), scatindex='none', scatlabel='none', label=False, combo=False, ylim=None, ylim_min=None, builddate=True, offset='none', date_n=1, linewidth=2.1, legdown=False, msize=0.35, fitline=None, plotly=False):
         
         if colors != 'none':
             mpl.rcParams['axes.color_cycle'] = colors
@@ -266,10 +270,54 @@ class ChartBuilder:
         
         if not(combo):
             plt.show()
+
+        if plotly:
+            self.make_plotly(data, ax, fig, kind=kind, unit_label=unit_label)
         
         self.ax = ax
 
         return fig
+
+    def make_plotly(self, data, ax, fig, kind="line", unit_label="none"):
+    
+        plotly.plotly.sign_in("nealbob", "zlb6t6yxll")
+        
+        ax.legend_.remove()
+        
+        #ax = data.plot(kind='line', legend=False)
+        #fig = ax.get_figure()
+        
+        #layout = go.Layout(autosize=False, width=1000, height=500, margin=, font=dict(size=14))
+        plotly_fig = plotly.tools.mpl_to_plotly(fig)
+        plotly_fig['layout']['showlegend'] = True
+        #plotly_fig['layout']['width'] = 1000
+        #plotly_fig['layout']['height'] = 500
+        #plotly_fig['layout']['margin'] = go.Margin(l=70, r=50, b=50, t=50, pad=5)
+        
+        font = dict(
+            family='Calibri',
+            size=14,
+            color='black'
+        )
+        labels = [s.decode('utf-8') for s in data.index]
+        step = len(data.index) / (len(labels) - 1)
+        plotly_fig['layout']['xaxis']=dict(title='', range=[0, len(data.index)], titlefont=font, tickfont=font, zeroline=False, showline=True, showgrid=False, ticktext=labels, ticks="", showticklabels=True, tickvals=[i * step for i in range(len(labels))])
+        plotly_fig['layout']['yaxis']=dict( titlefont=font,tickfont=font, showline=False, zeroline=False, gridcolor='grey', exponentformat="none", showticksuffix="first", ticksuffix=unit_label)
+        plotly_fig['layout']['font'] = font
+        plotly_fig['layout']['autosize']=False
+        plotly_fig['layout']['width']=700
+        plotly_fig['layout']['height']=450,        
+        plotly_fig['layout']['margin']=go.Margin(
+        l=50,
+        r=100,
+        b=50,
+        t=30,
+        pad=4)
+    
+                  
+        plot_url = py.plot(plotly_fig)
+        
+        return plot_url
 
     def abares_style(self, ax, data, kind, legend, unit_label, xtickformat, ytickformat, xunit_label, date, ylim=None, date_n=1, legdown=False):
      

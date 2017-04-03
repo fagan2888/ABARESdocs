@@ -112,7 +112,7 @@ class ReportBuilder:
     
     def make_chart_index(self, chartfile, chapters):
         
-        chart_index = pd.DataFrame({'name' : {}, 'type' : {}, 'chapter' : {}, 'number' : {}, 'caption' : {}, 'source' : {}})        
+        chart_index = pd.DataFrame({'name' : {}, 'type' : {},  'number' : {}, 'caption' : {}, 'source' : {}})        
         chart_number = 1
         table_number = 1
 
@@ -122,7 +122,7 @@ class ReportBuilder:
                 report = outfile.read()
                 outfile.close()  
         
-            chap_name, _ = find_between_multi(report, '# ' , ' {', 0)
+            #chap_name, _ = find_between_multi(report, '# ' , ' {', 0)
 
             n = len(report)
             idx = 0
@@ -133,7 +133,7 @@ class ReportBuilder:
                 try:
                     caption, idx = find_between_multi(report, '![' , '](', idx)
                     name, idx = find_between_multi(report, '(figures/' , ')', idx)
-                    chart_index = chart_index.append({'name' : name, 'type' : 'chart', 'chapter' : chap_name, 'number' : chart_number, 'caption' : caption}, ignore_index=True)
+                    chart_index = chart_index.append({'name' : name, 'type' : 'chart',  'number' : chart_number, 'caption' : caption}, ignore_index=True)
                     chart_number += 1       
                 except ValueError:
                     idx = n + 1
@@ -147,7 +147,7 @@ class ReportBuilder:
                 try:
                     name, idx = find_between_multi(report, '~' , '~', idx)
                     caption, idx = find_between_multi(report, 'Table: ' , ' {#', idx)
-                    chart_index = chart_index.append({'name' : name, 'type' : 'table', 'chapter' : chap_name, 'number' : table_number, 'caption' : caption}, ignore_index=True)
+                    chart_index = chart_index.append({'name' : name, 'type' : 'table', 'number' : table_number, 'caption' : caption}, ignore_index=True)
                     table_number += 1            
                 except ValueError:
                     idx = n + 1
